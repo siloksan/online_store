@@ -1,9 +1,10 @@
 .card {
     display: flex;
+    flex-direction: column;
 }
 
 .toy_photo {
-
+    max-width: 260px;
 }
 
 .price {

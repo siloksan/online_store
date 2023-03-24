@@ -1,3 +1,8 @@
 .app {
     background-color: #f1eded;
+    font-family: 'Inter','Helvetica Neue', 'Arial', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    width: 76%;
+    border: deepskyblue solid;
+    margin: 0 auto;
 }

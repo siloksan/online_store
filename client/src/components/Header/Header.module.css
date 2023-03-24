@@ -1,5 +1,12 @@
 .header {
     background-color: #e7e6e6;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 3fr 1fr;
+    gap: 14px;
+    padding-top: 14px;
+    color: black;
 }
 
 .links {
@@ -12,6 +19,7 @@
 
 .list {
     display: flex;
+    justify-content: space-around;
 }
 
 .list_item {
@@ -20,6 +28,8 @@
 
 .panel {
     display: flex;
+    justify-content: space-around;
+    grid-column : span 2;
 }
 
 .panel_item {
