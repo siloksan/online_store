@@ -11,15 +11,17 @@ const ToyCard = ({id, title, description, feedback, price, score}) => {
 	}
 
 	return (
-		<NavLink to={'/pageToy'} className={style.card}>
-			<img className={style.toy_photo} src={toyPhoto} alt="Фото Игрушки"/>
-			<p className={style.price}>{price}</p>
-			<h4 className={style.title}>{title}</h4>
-			<p className={style.description}>{description}</p>
-			<span>{score}</span>
-			<p className={style.feedback}>{feedback}</p>
+		<div className={style.card}>
+			<NavLink to={'/pageToy'}>
+				<img className={style.toy_photo} src={toyPhoto} alt="Фото Игрушки"/>
+				<p className={style.price}>{price}</p>
+				<h4 className={style.title}>{title}</h4>
+				<p className={style.description}>{description}</p>
+				<span>{score}</span>
+				<p className={style.feedback}>{feedback}</p>
+			</NavLink>
 			<MyButton onClick={putIntoBasket}>В корзину</MyButton>
-		</NavLink>
+		</div>
 	)
 }
 

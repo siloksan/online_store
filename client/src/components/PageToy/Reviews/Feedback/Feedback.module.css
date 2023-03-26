@@ -1,0 +1,49 @@
+.feedback {
+    border: 2px solid slategray;
+    border-radius: 10px;
+    margin: 10px 10px 0;
+}
+
+.feedback_body {
+    margin: 10px 50px 0 10px;
+    display: flex;
+    gap: 20px;
+}
+
+.avatar {
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: 30px;
+}
+
+.feedback_content {
+
+}
+
+.delete {
+    align-self: end;
+    margin-right: 10px;
+}
+
+.user_name {
+
+}
+
+.feedback_toolbar {
+    display: flex;
+    max-width: 50%;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+
+.data {
+
+}
+
+.rating {
+
+}
+
+.feedback_text {
+
+}

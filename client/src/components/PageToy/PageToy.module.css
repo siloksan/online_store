@@ -32,3 +32,24 @@
 .photo_switcher__slide {
     max-width: 75px;
 }
+
+.description {
+
+}
+
+.available {
+
+}
+
+.share {
+    display: flex;
+    gap: 0 5px;
+}
+
+.share_item {
+
+}
+
+.slide_toys {
+
+}
