@@ -4,13 +4,13 @@ import avatarUser
 	from "../../../../media/usersAvatar/1652235714_41-kartinkin-net-p-prikolnie-kartinki-dlya-stima-44.jpg";
 import MyButton from "../../../common/MyButton/MyButton";
 
-const Feedback = ({feedbackText, user}) => {
+const Feedback = ({feedbackText, user, currentData}) => {
 	return (
 		<div className={style.feedback}>
 			<div className={style.feedback_body}>
 				<img className={style.avatar} src={avatarUser} alt="Аватар пользователя"/>
 				<div className={style.feedback_content}>
-					<h4 className={style.user_name}>{user} <span className={style.data}>Дата</span></h4>
+					<h4 className={style.user_name}>{user} <span className={style.data}>{currentData}</span></h4>
 					<div className={style.rating}>Rating</div>
 					<p className={style.feedback_text}>{feedbackText}</p>
 				</div>

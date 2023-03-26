@@ -6,33 +6,39 @@ import Feedback from "./Feedback/Feedback";
 
 const Reviews = (props) => {
 
-	const [feedback, setFeedback] = useState([
-		{id: 1, user: 'Ксения', userAvatar: '', feedbackText: 'Хорошая игрушка'},
-		{
-			id: 2,
-			user: 'Света',
-			userAvatar: '',
-			feedbackText: 'Зайка волшебный! В этом году он будет актуален весь год и приносить мне радость. Спасибо мастерице))))'
-		},
-		{id: 3, user: 'Анастасия', userAvatar: '', feedbackText: 'Хорошая игрушка'}
-	]);
+	const [feedback, setFeedback] = useState([{
+		id: 1, userName: 'Ксения', userAvatar: '', feedbackText: 'Хорошая игрушка', currentData: '3.20.2021'
+	}, {
+		id: 2,
+		userName: 'Света',
+		userAvatar: '',
+		feedbackText: 'Зайка волшебный!' + ' В этом году он будет актуален весь год и приносить мне радость. ' + 'Спасибо мастерице))))',
+		currentData: '3.20.2021'
+	}, {
+		id: 3, userName: 'Анастасия', userAvatar: '', feedbackText: 'Хорошая игрушка', currentData: '3.20.2021'
+	}]);
 
 	const [userName, setUserName] = useState('')
 
-	const [feedbackText, setFeedbackText] = useState()
-
-	const addNewUserName = (e) => {
-		e.preventDefault();
-		console.log(userName);
-	}
+	const [feedbackText, setFeedbackText] = useState('')
 
 	const addNewFeedback = (e) => {
+		//предотвращает дефолтное обновление браузера при отправке формы
 		e.preventDefault();
-		console.log(feedbackText);
+		//создаём объект с двумя свойствами
+		const newFeedback = {
+			//id получаем вызвав следующий метод
+			id: Date.now(),
+			currentData: new Date().toLocaleDateString().replace(/\//g, "." ),
+			userName,
+			feedbackText
+		}
+		setFeedback([...feedback, newFeedback])
+		setUserName('')
+		setFeedbackText('')
 	}
 
-	return (
-		<section className={style.reviews}>
+	return (<section className={style.reviews}>
 			<h3 className={style.reviews_title}>Отзывы</h3>
 			<form action="">
 				{/*поля ввода имени не будет не будет имя должно автоматом подхватываться у авторизованного пользователя*/}
@@ -42,10 +48,13 @@ const Reviews = (props) => {
 				         placeholder="Оставьте свой отзыв"></MyInput>
 				<MyButton onClick={addNewFeedback}>Оставить отзыв</MyButton>
 			</form>
-			{feedback.map(fb => <Feedback key={fb.id} user={fb.user} feedbackText={fb.feedbackText}/>)
-			}
-		</section>
-	);
+			{feedback.map(fb => <Feedback
+				key={fb.id}
+				user={fb.userName}
+				feedbackText={fb.feedbackText}
+				currentData={fb.currentData}
+			/>)}
+		</section>);
 };
 
 export default Reviews;
