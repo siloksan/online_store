@@ -1,0 +1,14 @@
+.list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.list__column {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.list_item {
+
+}

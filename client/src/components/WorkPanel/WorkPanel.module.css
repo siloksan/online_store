@@ -1,0 +1,13 @@
+.panel {
+    display: flex;
+    justify-content: space-around;
+    grid-column : span 2;
+}
+
+.panel_item {
+
+}
+
+.logo {
+
+}

@@ -8,34 +8,3 @@
     padding-top: 14px;
     color: black;
 }
-
-.links {
-    display: flex;
-}
-
-.link {
-
-}
-
-.list {
-    display: flex;
-    justify-content: space-around;
-}
-
-.list_item {
-
-}
-
-.panel {
-    display: flex;
-    justify-content: space-around;
-    grid-column : span 2;
-}
-
-.panel_item {
-
-}
-
-.logo {
-
-}

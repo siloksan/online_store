@@ -7,29 +7,13 @@
     gap: 10px;
 }
 
-.sort {
-
-}
-
-.categories {
-
-}
-
-.size {
-
-}
-
-.price {
-
-}
-
-.age {
-
-}
-
 .catalog_grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 10px;
     padding-top: 20px;
+}
+
+.price {
+
 }
