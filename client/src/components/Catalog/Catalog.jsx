@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import style from './Catalog.module.css'
 import ToyCard from "./ToyCard/ToyCard";
 import Sorting from "./Sorting/Sorting";
