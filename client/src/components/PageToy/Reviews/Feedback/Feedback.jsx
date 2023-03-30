@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import style from "./Feedback.module.css";
 import avatarUser
 	from "../../../../media/usersAvatar/1652235714_41-kartinkin-net-p-prikolnie-kartinki-dlya-stima-44.jpg";
@@ -10,18 +10,12 @@ const Feedback = ({
 	                  currentDate,
 	                  removeFeedback,
 	                  feedback,
-	                  rating
+	                  rating,
+	                  putLike,
+	                  putDislike,
+	                  like,
+	                  id
                   }) => {
-
-	const [voice, setVoice] = useState(0)
-
-	const like = () => {
-		setVoice(voice + 1)
-	}
-
-	const disLike = () => {
-		setVoice(voice - 1)
-	}
 
 	const date = currentDate.toLocaleString('ru',
 		{
@@ -29,6 +23,9 @@ const Feedback = ({
 			month: 'numeric',
 			year: 'numeric'
 		})
+
+	const admin = true
+
 	return (
 		<div className={style.feedback}>
 			<div className={style.feedback_body}>
@@ -39,13 +36,13 @@ const Feedback = ({
 					<p className={style.feedback_text}>{feedbackText}</p>
 				</div>
 				{/*кнопка удалить должна быть только для админа и авторизованного пользователя*/}
-				<div className={style.delete}><MyButton onClick={() => removeFeedback(feedback)}>Удалить</MyButton></div>
+				{admin && <div className={style.delete}><MyButton onClick={() => removeFeedback(feedback)}>Удалить</MyButton></div>}
 			</div>
 			<div className={style.feedback_toolbar}>
 				<MyButton>Комментировать</MyButton>
 				<MyButton>Пожаловаться</MyButton>
-				<MyButton onClick={like}>Like</MyButton><span>{voice}</span>
-				<MyButton onClick={disLike}>Dislike</MyButton>
+				<MyButton onClick={() => putLike(id)}>Like</MyButton><span>{like}</span>
+				<MyButton onClick={() => putDislike(id)}>Dislike</MyButton>
 			</div>
 		</div>
 	);

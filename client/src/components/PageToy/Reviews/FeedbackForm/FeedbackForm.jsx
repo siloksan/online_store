@@ -15,6 +15,7 @@ const FeedbackForm = ({addFeedback}) => {
 			//id получаем вызвав следующий метод
 			id: Date.now(),
 			currentDate: new Date(),
+			like: 0
 		}
 		addFeedback(newFeedback)
 		setFeedback({userName: '', feedbackText: '', rating: 0})
