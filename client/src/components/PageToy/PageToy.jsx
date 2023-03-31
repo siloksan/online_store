@@ -7,7 +7,7 @@ import Reviews from "./Reviews/Reviews";
 const PageToy = (props) => {
 	//функция дублируется в ToyCard
 	const putIntoBasket = () => {
-		console.log('Put into the Basket' + ' ' + props.cards[0].id);
+		console.log(props.cards[0].id);
 	}
 
 	return (
@@ -55,7 +55,7 @@ const PageToy = (props) => {
 				</div>
 			</div>
 			<section className={style.slide_toys}>Слайдер с карточками на другие игрушки</section>
-			<Reviews/>
+			<Reviews admin={props.admin}/>
 		</main>
 	);
 };

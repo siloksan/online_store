@@ -9,12 +9,12 @@ const Feedback = ({
 	                  user,
 	                  currentDate,
 	                  removeFeedback,
-	                  feedback,
 	                  rating,
 	                  putLike,
 	                  putDislike,
 	                  like,
-	                  id
+	                  id,
+	                  admin
                   }) => {
 
 	const date = currentDate.toLocaleString('ru',
@@ -23,8 +23,6 @@ const Feedback = ({
 			month: 'numeric',
 			year: 'numeric'
 		})
-
-	const admin = true
 
 	return (
 		<div className={style.feedback}>
@@ -35,8 +33,8 @@ const Feedback = ({
 					<div className={style.rating}>{rating}</div>
 					<p className={style.feedback_text}>{feedbackText}</p>
 				</div>
-				{/*кнопка удалить должна быть только для админа и авторизованного пользователя*/}
-				{admin && <div className={style.delete}><MyButton onClick={() => removeFeedback(feedback)}>Удалить</MyButton></div>}
+				{/*кнопка удалить должна быть только для админа*/}
+				{admin && <div className={style.delete}><MyButton onClick={() => removeFeedback(id)}>Удалить</MyButton></div>}
 			</div>
 			<div className={style.feedback_toolbar}>
 				<MyButton>Комментировать</MyButton>

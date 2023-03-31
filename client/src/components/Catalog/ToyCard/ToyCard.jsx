@@ -4,10 +4,10 @@ import toyPhoto from "../../../media/toys/knb7OunBRkQ.jpg"
 import MyButton from "../../common/MyButton/MyButton";
 import {NavLink} from "react-router-dom";
 
-const ToyCard = ({id, title, description, feedback, price, score}) => {
+const ToyCard = ({id, title, description, feedback, price, score, admin, removeToyCard}) => {
 	//функция дублируется в PageToy
 	const putIntoBasket = () => {
-		console.log('Put into the Basket' + ' ' + id);
+		console.log(id);
 	}
 
 	return (
@@ -21,6 +21,7 @@ const ToyCard = ({id, title, description, feedback, price, score}) => {
 				<p className={style.feedback}>{feedback}</p>
 			</NavLink>
 			<MyButton onClick={putIntoBasket}>В корзину</MyButton>
+			{admin && <MyButton onClick={() => removeToyCard(id)}>Убрать товар из каталога</MyButton>}
 		</div>
 	)
 }

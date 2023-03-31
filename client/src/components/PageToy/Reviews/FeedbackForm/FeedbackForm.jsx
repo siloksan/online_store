@@ -22,7 +22,7 @@ const FeedbackForm = ({addFeedback}) => {
 	}
 
 	return (
-		<form action="">
+		<form>
 			{/*поля ввода имени не будет не будет имя должно автоматом подхватываться у авторизованного пользователя*/}
 			<span>Поставьте свою оценку</span>
 			<MyInput value={feedback.rating}

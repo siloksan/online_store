@@ -1,24 +1,35 @@
 import React from "react";
 import style from './Catalog.module.css'
 import ToyCard from "./ToyCard/ToyCard";
-import Sorting from "./Sorting/Sorting";
 import Filtration from "./Filtration/Filtration";
+import MySelect from "../common/MySelect/MySelect";
 
-const Catalog = (props) => {
+const Catalog = ({cards, admin, removeToyCard, selectSort, sortCards}) => {
 
 	return (
 		<main className={style.catalog}>
 			{/*отцентрировал заголовок таким образом для ознакомления*/}
 			<h1 style={{textAlign: 'center'}}>Наши игрушки</h1>
 			<div className={style.filter}>
-				<Sorting/>
+
+				<MySelect
+					value={selectSort}
+					onChange={sortCards}
+					defaultValue='Сортировать по'
+					options={[
+						{value: 'title', name: 'алфавиту'},
+						{value: 'priceIncrease', name: 'возрастанию цены'},
+						{value: 'price', name: 'убыванию цены'},
+						{value: 'rating', name: 'рейтингу'},
+						{value: 'score', name: 'популярности'}
+					]}
+				/>
 				<Filtration/>
-				<form action="">
-					<input placeholder="Фильтрация по цене" type="range" min="200" max="5000" className={style.price} value="1000"/>
-				</form>
+				<input placeholder="Фильтрация по цене" type="range" min="200" max="5000" className={style.price}
+				       value="1000"/>
 			</div>
 			<div className={style.catalog_grid}>
-				{props.cards.map((toy) =>
+				{cards.map((toy) =>
 					<ToyCard key={toy.id}
 					         id={toy.id}
 					         price={toy.price}
@@ -26,7 +37,9 @@ const Catalog = (props) => {
 					         description={toy.description}
 					         feedback={toy.feedback}
 					         score={toy.score}
-					         rating={toy.rating}/>)
+					         rating={toy.rating}
+					         admin={admin}
+					         removeToyCard={removeToyCard}/>)
 				}
 			</div>
 		</main>

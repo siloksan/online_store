@@ -4,7 +4,7 @@ import Feedback from "./Feedback/Feedback";
 import FeedbackForm from "./FeedbackForm/FeedbackForm";
 import MySelect from "../../common/MySelect/MySelect";
 
-const Reviews = () => {
+const Reviews = ({admin}) => {
 
 	const [reviews, setReviews] = useState([{
 		id: 1,
@@ -13,7 +13,7 @@ const Reviews = () => {
 		feedbackText: 'Хорошая игрушка',
 		currentDate: new Date("2012-02-10T13:19:11+0000"),
 		rating: 4,
-		like: '0'
+		like: 0
 	}, {
 		id: 2,
 		userName: 'Света',
@@ -21,7 +21,7 @@ const Reviews = () => {
 		feedbackText: 'Зайка волшебный! В этом году он будет актуален весь год и приносить мне радость. Спасибо мастерице))))',
 		currentDate: new Date("2012-10-10T13:19:11+0000"),
 		rating: 2,
-		like: '2'
+		like: 2
 	}, {
 		id: 3,
 		userName: 'Анастасия',
@@ -29,13 +29,13 @@ const Reviews = () => {
 		feedbackText: 'Хорошая игрушка',
 		currentDate: new Date("2012-11-10T13:19:11+0000"),
 		rating: 5,
-		like: '-2'
+		like: -2
 	}]);
 
 	const [selectedSort, setSelectedSort] = useState('')
 
-	const removeFeedback = (feedback) => {
-		setReviews(reviews.filter(fb => fb.id !== feedback.id))
+	const removeFeedback = (id) => {
+		setReviews(reviews.filter(fb => fb.id !== id))
 	}
 
 	const addFeedback = (newFeedback) => {
@@ -73,7 +73,7 @@ const Reviews = () => {
 				{value: 'like', name: 'По популярности'}]
 			}/>
 		{reviews.map(fb => <Feedback
-			feedback={fb}
+			admin={admin}
 			removeFeedback={removeFeedback}
 			key={fb.id}
 			id={fb.id}
