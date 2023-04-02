@@ -1,10 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import style from './Catalog.module.css'
 import ToyCard from "./ToyCard/ToyCard";
 import Filtration from "./Filtration/Filtration";
 import MySelect from "../common/MySelect/MySelect";
+import MyInput from "../common/MyInput/MyInput";
+import MyButton from "../common/MyButton/MyButton";
 
-const Catalog = ({cards, admin, removeToyCard, selectSort, sortCards}) => {
+const Catalog = ({cards, admin, removeToyCard, selectSort, sortCards, filterByPrice}) => {
+
+	const [limit, setLimit] = useState({min: '', max: ''})
+
+	const setNewLimit = (e) => {
+		e.preventDefault();
+		filterByPrice({...limit})
+	}
 
 	return (
 		<main className={style.catalog}>
@@ -25,8 +34,13 @@ const Catalog = ({cards, admin, removeToyCard, selectSort, sortCards}) => {
 					]}
 				/>
 				<Filtration/>
-				<input placeholder="Фильтрация по цене" type="range" min="200" max="5000" className={style.price}
-				       value="1000"/>
+				{/*sorting don't work yet*/}
+				<form className={style.filter_price}>
+					<p>Цена, ₽</p>
+					<MyInput value={limit.min} onChange={e => setLimit({...limit, min: e.target.value})} type='text' placeholder={'min'}></MyInput>
+					<MyInput value={limit.max} onChange={e => setLimit({...limit, max: e.target.value})} type='text' placeholder={'max'}></MyInput>
+					<MyButton onClick={setNewLimit}>Отфильтровать по цене</MyButton>
+				</form>
 			</div>
 			<div className={style.catalog_grid}>
 				{cards.map((toy) =>

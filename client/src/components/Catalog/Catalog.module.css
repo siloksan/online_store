@@ -14,6 +14,7 @@
     padding-top: 20px;
 }
 
-.price {
-
+.filter_price{
+ display: flex;
+    gap: 0 10px;
 }
