@@ -6,8 +6,7 @@ import ListOfToyCards from "./ListOfToyCards/ListOfToyCards";
 import MyInput from "../common/MyInput/MyInput";
 
 const Catalog = ({
-	                 cards, admin, removeToyCard, selectSort, sortCards,
-	                 setLimitPrice, limitPrice
+	                 cards, admin, removeToyCard, selectSort, sortCards
                  }) => {
 
 	return (
@@ -29,11 +28,10 @@ const Catalog = ({
 					]}
 				/>
 				<Filtration/>
-				Sorting don't work yet
 				<form className={style.filter_price}>
 					<p>Цена, ₽</p>
-					<MyInput value={limitPrice.min} onChange={e => setLimitPrice({...limitPrice, min: e.target.value})} type='text' placeholder={'min'}></MyInput>
-					<MyInput value={limitPrice.max} onChange={e => setLimitPrice({...limitPrice, max: e.target.value})} type='text' placeholder={'max'}></MyInput>
+					<MyInput value={selectSort.minPrice} onChange={e => sortCards({...selectSort, minPrice: e.target.value})} type='text' placeholder={'min'}></MyInput>
+					<MyInput value={selectSort.maxPrice} onChange={e => sortCards({...selectSort, maxPrice: e.target.value})} type='text' placeholder={'max'}></MyInput>
 				</form>
 			</div>
 			<ListOfToyCards cards={cards} admin={admin} removeToyCard={removeToyCard}/>

@@ -118,7 +118,7 @@ function App() {
 		setCards(cards.filter(el => el.id !== id))
 	}
 
-	const [filter, setFilter] = useState({sort: '', query: ''})
+	const [filter, setFilter] = useState({sort: '', query: '', minPrice: '', maxPrice: ''})
 
 	const sortedCards = useMemo(() => {
 		switch (filter.sort) {
@@ -139,15 +139,15 @@ function App() {
 	}, [sortedCards, filter.query])
 
 
-	const [limitPrice, setLimitPrice] = useState({min: '', max: ''})
+	// const [limitPrice, setLimitPrice] = useState({min: '', max: ''})
 
 	const filterByPrice = useMemo(() => {
-		if (!limitPrice.max) {
-			return sortedAndSearchCards.filter(el => (el.price >= limitPrice.min))
+		if (!filter.maxPrice) {
+			return sortedAndSearchCards.filter(el => (el.price >= filter.minPrice))
 		} else {
-			return sortedAndSearchCards.filter(el => (el.price >= limitPrice.min && el.price <= limitPrice.max))
+			return sortedAndSearchCards.filter(el => (el.price >= filter.minPrice && el.price <= filter.maxPrice))
 		}
-	}, [limitPrice, sortedAndSearchCards])
+	}, [filter, sortedAndSearchCards])
 
 
 	return (<BrowserRouter>
@@ -155,7 +155,7 @@ function App() {
 			<Header searchQuery={filter} setSearchQuery={setFilter}/>
 			<AppRoutes cards={filterByPrice} addToyCard={addToyCard} removeToyCard={removeToyCard}
 			           sortCards={setFilter}
-			           selectSort={filter} limitPrice={limitPrice} setLimitPrice={setLimitPrice}/>
+			           selectSort={filter}/>
 			<Footer/>
 		</div>
 	</BrowserRouter>);

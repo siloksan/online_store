@@ -9,16 +9,14 @@ import Orders from "../Orders/Orders";
 import Basket from "../Basket/Basket";
 import PageToy from "../PageToy/PageToy";
 import AdminPage from "../AdminPage/AdminPage";
-import Example from "../Example/Example";
+// import Example from "../Example/Example";
 
 const AppRoutes = ({
 	                   cards,
 	                   addToyCard,
 	                   removeToyCard,
 	                   selectSort,
-	                   sortCards,
-	                   limitPrice,
-	                   setLimitPrice
+	                   sortCards
                    }) => {
 
 	const [admin, setAdmin] = useState(false)
@@ -38,9 +36,7 @@ const AppRoutes = ({
 			                         cards={cards}
 			                         removeToyCard={removeToyCard}
 			                         sortCards={sortCards}
-			                         selectSort={selectSort}
-			                         limitPrice={limitPrice}
-			                         setLimitPrice={setLimitPrice}/>}>
+			                         selectSort={selectSort}/>}>
 
 			</Route>
 			<Route path='/admin' element={<AdminPage admin={admin} authAdmin={authAdmin} adminIsOut={adminIsOut} cards={cards}
@@ -52,7 +48,7 @@ const AppRoutes = ({
 			<Route path='/favourites' element={<Favourites/>}></Route>
 			<Route path='/orders' element={<Orders/>}></Route>
 			<Route path='/basket' element={<Basket/>}></Route>
-			<Route path='/example' element={<Example/>}></Route>
+			{/*<Route path='/example' element={<Example/>}></Route>*/}
 		</Routes>
 	)
 }

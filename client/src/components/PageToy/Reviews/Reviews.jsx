@@ -3,6 +3,8 @@ import style from "./Reviews.module.css";
 import Feedback from "./Feedback/Feedback";
 import FeedbackForm from "./FeedbackForm/FeedbackForm";
 import MySelect from "../../common/MySelect/MySelect";
+import MyModal from "../../common/MyModal/MyModal";
+import MyButton from "../../common/MyButton/MyButton";
 
 const Reviews = ({admin}) => {
 
@@ -40,6 +42,7 @@ const Reviews = ({admin}) => {
 
 	const addFeedback = (newFeedback) => {
 		setReviews([...reviews, newFeedback])
+		setVisible(false)
 	}
 
 	const sortReviews = (sort) => {
@@ -59,9 +62,14 @@ const Reviews = ({admin}) => {
 		setReviews(dislike)
 	}
 
+	const [visible, setVisible] = useState(false)
+
 	return (<section className={style.reviews}>
 		<h3 className={style.reviews_title}>Отзывы</h3>
-		<FeedbackForm addFeedback={addFeedback}/>
+		<MyButton onClick={() => setVisible(true)}>Оставить отзыв</MyButton>
+		<MyModal visible={visible} setVisible={setVisible}>
+			<FeedbackForm addFeedback={addFeedback}/>
+		</MyModal>
 		<hr style={{margin: '15px 0'}}/>
 		<MySelect
 			value={selectedSort}
