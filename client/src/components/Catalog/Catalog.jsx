@@ -1,19 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import style from './Catalog.module.css'
-import ToyCard from "./ToyCard/ToyCard";
 import Filtration from "./Filtration/Filtration";
 import MySelect from "../common/MySelect/MySelect";
+import ListOfToyCards from "./ListOfToyCards/ListOfToyCards";
 import MyInput from "../common/MyInput/MyInput";
-import MyButton from "../common/MyButton/MyButton";
 
-const Catalog = ({cards, admin, removeToyCard, selectSort, sortCards, filterByPrice}) => {
-
-	const [limit, setLimit] = useState({min: '', max: ''})
-
-	const setNewLimit = (e) => {
-		e.preventDefault();
-		filterByPrice({...limit})
-	}
+const Catalog = ({
+	                 cards, admin, removeToyCard, selectSort, sortCards,
+	                 setLimitPrice, limitPrice
+                 }) => {
 
 	return (
 		<main className={style.catalog}>
@@ -22,8 +17,8 @@ const Catalog = ({cards, admin, removeToyCard, selectSort, sortCards, filterByPr
 			<div className={style.filter}>
 
 				<MySelect
-					value={selectSort}
-					onChange={sortCards}
+					value={selectSort.sort}
+					onChange={selectedSort => sortCards({...selectSort, sort: selectedSort})}
 					defaultValue='Сортировать по'
 					options={[
 						{value: 'title', name: 'алфавиту'},
@@ -34,28 +29,14 @@ const Catalog = ({cards, admin, removeToyCard, selectSort, sortCards, filterByPr
 					]}
 				/>
 				<Filtration/>
-				{/*sorting don't work yet*/}
+				Sorting don't work yet
 				<form className={style.filter_price}>
 					<p>Цена, ₽</p>
-					<MyInput value={limit.min} onChange={e => setLimit({...limit, min: e.target.value})} type='text' placeholder={'min'}></MyInput>
-					<MyInput value={limit.max} onChange={e => setLimit({...limit, max: e.target.value})} type='text' placeholder={'max'}></MyInput>
-					<MyButton onClick={setNewLimit}>Отфильтровать по цене</MyButton>
+					<MyInput value={limitPrice.min} onChange={e => setLimitPrice({...limitPrice, min: e.target.value})} type='text' placeholder={'min'}></MyInput>
+					<MyInput value={limitPrice.max} onChange={e => setLimitPrice({...limitPrice, max: e.target.value})} type='text' placeholder={'max'}></MyInput>
 				</form>
 			</div>
-			<div className={style.catalog_grid}>
-				{cards.map((toy) =>
-					<ToyCard key={toy.id}
-					         id={toy.id}
-					         price={toy.price}
-					         title={toy.title}
-					         description={toy.description}
-					         feedback={toy.feedback}
-					         score={toy.score}
-					         rating={toy.rating}
-					         admin={admin}
-					         removeToyCard={removeToyCard}/>)
-				}
-			</div>
+			<ListOfToyCards cards={cards} admin={admin} removeToyCard={removeToyCard}/>
 		</main>
 	)
 }

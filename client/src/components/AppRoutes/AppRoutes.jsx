@@ -9,8 +9,17 @@ import Orders from "../Orders/Orders";
 import Basket from "../Basket/Basket";
 import PageToy from "../PageToy/PageToy";
 import AdminPage from "../AdminPage/AdminPage";
+import Example from "../Example/Example";
 
-const AppRoutes = ({cards, setCards}) => {
+const AppRoutes = ({
+	                   cards,
+	                   addToyCard,
+	                   removeToyCard,
+	                   selectSort,
+	                   sortCards,
+	                   limitPrice,
+	                   setLimitPrice
+                   }) => {
 
 	const [admin, setAdmin] = useState(false)
 
@@ -22,38 +31,18 @@ const AppRoutes = ({cards, setCards}) => {
 		setAdmin(false)
 	}
 
-	const addToyCard = (newToyCar) => {
-		setCards([...cards, newToyCar])
-	}
-
-	const removeToyCard = (id) => {
-		setCards(cards.filter(el => el.id !== id))
-	}
-
-	const [selectSort, setSelectSort] = useState('')
-
-	const sortCards = (sort) => {
-		setSelectSort(sort)
-		switch (sort) {
-			case 'priceIncrease':
-				sort = 'price'
-				return setCards([...cards].sort((a, b) => a[sort] - b[sort]))
-			case 'title':
-				return setCards([...cards].sort((a, b) => a[sort].localeCompare(b[sort])))
-			default:
-				return setCards([...cards].sort((a, b) => b[sort] - a[sort]))
-		}
-	}
-	//sorting don't work yet
-
-	const filterByPrice = (limit) => {
-		setCards([...cards].filter(el => (el.price >= limit.min && el.price <= limit.min)))
-	}
 	return (
 		<Routes>
 			<Route path='/catalog'
-			       element={<Catalog admin={admin} cards={cards} removeToyCard={removeToyCard} sortCards={sortCards}
-			                         selectSort={selectSort} filterByPrice={filterByPrice}/>}></Route>
+			       element={<Catalog admin={admin}
+			                         cards={cards}
+			                         removeToyCard={removeToyCard}
+			                         sortCards={sortCards}
+			                         selectSort={selectSort}
+			                         limitPrice={limitPrice}
+			                         setLimitPrice={setLimitPrice}/>}>
+
+			</Route>
 			<Route path='/admin' element={<AdminPage admin={admin} authAdmin={authAdmin} adminIsOut={adminIsOut} cards={cards}
 			                                         addToyCard={addToyCard}/>}></Route>
 			<Route path='/pageToy' element={<PageToy admin={admin} cards={cards}/>}></Route>
@@ -63,6 +52,7 @@ const AppRoutes = ({cards, setCards}) => {
 			<Route path='/favourites' element={<Favourites/>}></Route>
 			<Route path='/orders' element={<Orders/>}></Route>
 			<Route path='/basket' element={<Basket/>}></Route>
+			<Route path='/example' element={<Example/>}></Route>
 		</Routes>
 	)
 }

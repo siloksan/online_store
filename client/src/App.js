@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import {BrowserRouter} from "react-router-dom";
 import AppRoutes from "./components/AppRoutes/AppRoutes";
-import React, {useState} from "react";
+import React, {useMemo, useState} from "react";
 import {nanoid} from "nanoid";
 
 function App() {
@@ -110,10 +110,52 @@ function App() {
 		}
 	])
 
+	const addToyCard = (newToyCard) => {
+		setCards([...cards, newToyCard])
+	}
+
+	const removeToyCard = (id) => {
+		setCards(cards.filter(el => el.id !== id))
+	}
+
+	const [filter, setFilter] = useState({sort: '', query: ''})
+
+	const sortedCards = useMemo(() => {
+		switch (filter.sort) {
+			case false:
+				return cards
+			case 'priceIncrease':
+				const sort = 'price'
+				return [...cards].sort((a, b) => a[sort] - b[sort])
+			case 'title':
+				return [...cards].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
+			default:
+				return [...cards].sort((a, b) => b[filter.sort] - a[filter.sort])
+		}
+	}, [filter.sort, cards])
+
+	const sortedAndSearchCards = useMemo(() => {
+		return sortedCards.filter(card => card.title.toLowerCase().includes(filter.query.toLowerCase()))
+	}, [sortedCards, filter.query])
+
+
+	const [limitPrice, setLimitPrice] = useState({min: '', max: ''})
+
+	const filterByPrice = useMemo(() => {
+		if (!limitPrice.max) {
+			return sortedAndSearchCards.filter(el => (el.price >= limitPrice.min))
+		} else {
+			return sortedAndSearchCards.filter(el => (el.price >= limitPrice.min && el.price <= limitPrice.max))
+		}
+	}, [limitPrice, sortedAndSearchCards])
+
+
 	return (<BrowserRouter>
 		<div className="app">
-			<Header cards={cards} setCards={setCards}/>
-			<AppRoutes cards={cards} setCards={setCards}/>
+			<Header searchQuery={filter} setSearchQuery={setFilter}/>
+			<AppRoutes cards={filterByPrice} addToyCard={addToyCard} removeToyCard={removeToyCard}
+			           sortCards={setFilter}
+			           selectSort={filter} limitPrice={limitPrice} setLimitPrice={setLimitPrice}/>
 			<Footer/>
 		</div>
 	</BrowserRouter>);

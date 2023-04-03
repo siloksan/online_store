@@ -1,7 +1,7 @@
 import React from "react";
 import style from './ToyCard.module.css'
-import toyPhoto from "../../../media/toys/knb7OunBRkQ.jpg"
-import MyButton from "../../common/MyButton/MyButton";
+import toyPhoto from "../../../../media/toys/knb7OunBRkQ.jpg"
+import MyButton from "../../../common/MyButton/MyButton";
 import {NavLink} from "react-router-dom";
 
 const ToyCard = ({id, title, description, feedback, price, score, admin, removeToyCard}) => {

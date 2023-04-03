@@ -1,21 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import style from "./Search.module.css";
 import MyInput from "../../common/MyInput/MyInput";
-import MyButton from "../../common/MyButton/MyButton";
+// import MyButton from "../../common/MyButton/MyButton";
 
-const Search = ({cards, setCards}) => {
-
-	const [searchQuery, setSearchQuery] = useState('')
-
-	const searchForObject = (e) => {
-		e.preventDefault()
-		console.log(searchQuery);
-	}
+const Search = ({searchQuery, setSearchQuery}) => {
 
 	return (
 		<form className={style.search} action="">
-			<MyInput value={searchQuery} type='text' placeholder='Поиск в каталоге' onChange={e => setSearchQuery(e.target.value)}/>
-			<MyButton onClick={searchForObject}>Search</MyButton>
+			<MyInput value={searchQuery.query} type='text' placeholder='Поиск в каталоге'
+			         onChange={e => setSearchQuery({...searchQuery, query: e.target.value})}/>
+			{/*I don't know yet how to do a button click search*/}
+			{/*<MyButton onClick={}>Search</MyButton>*/}
 		</form>
 	);
 };
