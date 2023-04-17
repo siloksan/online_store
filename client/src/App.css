@@ -6,3 +6,20 @@
     border: deepskyblue solid;
     margin: 0 auto;
 }
+
+
+/*Добавляет плавную анимацию при добавлении и удалении отзыва*/
+.feedback-enter {
+    opacity: 0;
+}
+.feedback-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+.feedback-exit {
+    opacity: 1;
+}
+.feedback-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+}

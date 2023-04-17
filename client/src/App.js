@@ -3,8 +3,9 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import {BrowserRouter} from "react-router-dom";
 import AppRoutes from "./components/AppRoutes/AppRoutes";
-import React, {useMemo, useState} from "react";
+import React, {useState} from "react";
 import {nanoid} from "nanoid";
+import {useCards} from "./components/hooks/useCards";
 
 function App() {
 
@@ -119,36 +120,7 @@ function App() {
 	}
 
 	const [filter, setFilter] = useState({sort: '', query: '', minPrice: '', maxPrice: ''})
-
-	const sortedCards = useMemo(() => {
-		switch (filter.sort) {
-			case false:
-				return cards
-			case 'priceIncrease':
-				const sort = 'price'
-				return [...cards].sort((a, b) => a[sort] - b[sort])
-			case 'title':
-				return [...cards].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
-			default:
-				return [...cards].sort((a, b) => b[filter.sort] - a[filter.sort])
-		}
-	}, [filter.sort, cards])
-
-	const sortedAndSearchCards = useMemo(() => {
-		return sortedCards.filter(card => card.title.toLowerCase().includes(filter.query.toLowerCase()))
-	}, [sortedCards, filter.query])
-
-
-	// const [limitPrice, setLimitPrice] = useState({min: '', max: ''})
-
-	const filterByPrice = useMemo(() => {
-		if (!filter.maxPrice) {
-			return sortedAndSearchCards.filter(el => (el.price >= filter.minPrice))
-		} else {
-			return sortedAndSearchCards.filter(el => (el.price >= filter.minPrice && el.price <= filter.maxPrice))
-		}
-	}, [filter, sortedAndSearchCards])
-
+	const filterByPrice = useCards(cards, filter.sort, filter.query, filter.minPrice, filter.maxPrice)
 
 	return (<BrowserRouter>
 		<div className="app">
