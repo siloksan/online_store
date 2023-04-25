@@ -12,7 +12,7 @@ const ToyCard = ({id, title, description, feedback, price, score, admin, removeT
 
 	return (
 		<div className={style.card}>
-			<NavLink to={'/pageToy'}>
+			<NavLink to={'/product'}>
 				<img className={style.toy_photo} src={toyPhoto} alt="Фото Игрушки"/>
 				<p className={style.price}>{price}</p>
 				<h4 className={style.title}>{title}</h4>
