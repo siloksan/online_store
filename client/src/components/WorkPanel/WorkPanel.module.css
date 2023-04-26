@@ -11,3 +11,9 @@
 .logo {
 
 }
+
+.panel_items {
+    display: flex;
+    justify-content: space-around;
+}
+

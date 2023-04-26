@@ -2,7 +2,10 @@ import React, {useState} from 'react';
 import style from "./Reviews.module.css";
 import Feedback from "./Feedback/Feedback";
 import FeedbackForm from "./FeedbackForm/FeedbackForm";
-import MySelect from "../../common/MySelect/MySelect";
+import MySelect from "../../../common/MySelect/MySelect";
+import MyModal from "../../../common/MyModal/MyModal";
+import MyButton from "../../../common/MyButton/MyButton";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 const Reviews = ({admin}) => {
 
@@ -40,6 +43,7 @@ const Reviews = ({admin}) => {
 
 	const addFeedback = (newFeedback) => {
 		setReviews([...reviews, newFeedback])
+		setVisible(false)
 	}
 
 	const sortReviews = (sort) => {
@@ -59,9 +63,14 @@ const Reviews = ({admin}) => {
 		setReviews(dislike)
 	}
 
+	const [visible, setVisible] = useState(false)
+
 	return (<section className={style.reviews}>
 		<h3 className={style.reviews_title}>Отзывы</h3>
-		<FeedbackForm addFeedback={addFeedback}/>
+		<MyButton onClick={() => setVisible(true)}>Оставить отзыв</MyButton>
+		<MyModal visible={visible} setVisible={setVisible}>
+			<FeedbackForm addFeedback={addFeedback}/>
+		</MyModal>
 		<hr style={{margin: '15px 0'}}/>
 		<MySelect
 			value={selectedSort}
@@ -72,19 +81,25 @@ const Reviews = ({admin}) => {
 				{value: 'rating', name: 'По оценке'},
 				{value: 'like', name: 'По популярности'}]
 			}/>
-		{reviews.map(fb => <Feedback
-			admin={admin}
-			removeFeedback={removeFeedback}
-			key={fb.id}
-			id={fb.id}
-			user={fb.userName}
-			feedbackText={fb.feedbackText}
-			currentDate={fb.currentDate}
-			rating={fb.rating}
-			putLike={putLike}
-			putDislike={putDislike}
-			like={fb.like}
-		/>)}
+		<TransitionGroup className="todo-list">
+			{reviews.map(fb =>
+				<CSSTransition
+					key={fb.id}
+					timeout={500}
+					classNames='feedback'>
+					<Feedback
+						admin={admin}
+						removeFeedback={removeFeedback}
+						id={fb.id}
+						user={fb.userName}
+						feedbackText={fb.feedbackText}
+						currentDate={fb.currentDate}
+						rating={fb.rating}
+						putLike={putLike}
+						putDislike={putDislike}
+						like={fb.like}/>
+				</CSSTransition>)}
+		</TransitionGroup>
 		{reviews.length === 0 && <p>Здесь ещё нет ни одного отзыва</p>}
 	</section>);
 };

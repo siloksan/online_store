@@ -1,8 +1,8 @@
 import React from 'react';
 import style from "./Feedback.module.css";
 import avatarUser
-	from "../../../../media/usersAvatar/1652235714_41-kartinkin-net-p-prikolnie-kartinki-dlya-stima-44.jpg";
-import MyButton from "../../../common/MyButton/MyButton";
+	from "../../../../../media/usersAvatar/1652235714_41-kartinkin-net-p-prikolnie-kartinki-dlya-stima-44.jpg";
+import MyButton from "../../../../common/MyButton/MyButton";
 
 const Feedback = ({
 	                  feedbackText,

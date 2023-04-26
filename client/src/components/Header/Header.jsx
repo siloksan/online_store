@@ -4,12 +4,12 @@ import LinksIcons from "../LinkIcons/LinksIcons";
 import Navbar from "../Navbar/Navbar";
 import WorkPanel from "../WorkPanel/WorkPanel";
 
-const Header = () => {
+const Header = ({setSearchQuery, searchQuery}) => {
 	return (
 		<header className={style.header}>
 			<Navbar/>
 			<LinksIcons/>
-			<WorkPanel/>
+			<WorkPanel setSearchQuery={setSearchQuery} searchQuery={searchQuery}/>
 		</header>
 	)
 }

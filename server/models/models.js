@@ -1,5 +1,5 @@
 const sequelize = require('../db')
-const {DataTypes} = require('sequelize')
+const { DataTypes } = require('sequelize')
 
 const User = sequelize.define('user', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -12,50 +12,33 @@ const Basket = sequelize.define('basket', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
-const BasketToys = sequelize.define('basket_toys', {
+const BasketProduct = sequelize.define('basket_product', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
-const Toy = sequelize.define('toy', {
+const Product = sequelize.define('product', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 	name: {type: DataTypes.STRING, unique: true, allowNull: false},
 	price: {type: DataTypes.INTEGER, allowNull: false},
 	rating: {type: DataTypes.INTEGER, defaultValue: 0},
-	// feedback: {type: DataTypes.STRING, allowNull: true},
 	img: {type: DataTypes.STRING, allowNull: false},
 })
 
-//Пока нет мыслей как использовать!?
-// const Type = sequelize.define('type', {
-// 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-// 	name: {type: DataTypes.STRING, unique: true, allowNull: false},
-// })
-//
-// const Brand = sequelize.define('brand', {
-// 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-// 	name: {type: DataTypes.STRING, unique: true, allowNull: false},
-// })
-//До этой строки не использую, все зависимости прописаны
+const Type = sequelize.define('type', {
+	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+	name: {type: DataTypes.STRING, unique: true, allowNull: false},
+})
 
 const Rating = sequelize.define('rating', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 	rate: {type: DataTypes.INTEGER, allowNull: false},
 })
 
-// const FeedBack = sequelize.define('feedback', {
-// 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-// 	feedBack: {type: DataTypes.STRING, allowNull: true},
-// })
-
-const ToyInfo = sequelize.define('toy_info', {
+const ProductInfo = sequelize.define('product_info', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 	title: {type: DataTypes.STRING, allowNull: false},
 	description: {type: DataTypes.STRING, allowNull: false},
 })
-
-// const TypeBrand = sequelize.define('type_brand', {
-// 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-// })
 
 User.hasOne(Basket)
 Basket.belongsTo(User)
@@ -63,42 +46,27 @@ Basket.belongsTo(User)
 User.hasMany(Rating)
 Rating.belongsTo(User)
 
-// User.hasMany(FeedBack)
-// FeedBack.belongsTo(User)
+Basket.hasMany(BasketProduct)
+BasketProduct.belongsTo(Basket)
 
-Basket.hasMany(BasketToys)
-BasketToys.belongsTo(Basket)
+Type.hasMany(Product)
+Product.belongsTo(Type)
 
-// Type.hasMany(Toy)
-// Toy.belongsTo(Type)
-//
-// Brand.hasMany(Toy)
-// Toy.belongsTo(Brand)
+Product.hasMany(Rating)
+Rating.belongsTo(Product)
 
-Toy.hasMany(Rating)
-Rating.belongsTo(Toy)
+Product.hasMany(BasketProduct)
+BasketProduct.belongsTo(Product)
 
-// Toy.hasMany(FeedBack)
-// FeedBack.belongsTo(Toy)
-
-Toy.hasMany(BasketToys)
-BasketToys.belongsTo(Toy)
-
-Toy.hasMany(ToyInfo)
-ToyInfo.belongsTo(Toy)
-
-// Type.belongsToMany(Brand, {through: TypeBrand})
-// Brand.belongsToMany(Type, {through: TypeBrand})
+Product.hasMany(ProductInfo, {as: 'info'})
+ProductInfo.belongsTo(Product)
 
 module.exports = {
 	User,
 	Basket,
-	BasketToys,
-	Toy,
-	ToyInfo,
-	// Type,
-	// Brand,
+	BasketProduct,
+	Product,
+	ProductInfo,
 	Rating,
-	// FeedBack,
-	// TypeBrand
+	Type
 }

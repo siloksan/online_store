@@ -1,7 +1,7 @@
 import React from 'react';
-import toyPhoto from "../../media/toys/knb7OunBRkQ.jpg"
+import toyPhoto from "../../../media/toys/knb7OunBRkQ.jpg"
 import style from "./PageToy.module.css";
-import MyButton from "../common/MyButton/MyButton";
+import MyButton from "../../common/MyButton/MyButton";
 import Reviews from "./Reviews/Reviews";
 
 const PageToy = (props) => {

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import MyButton from "../common/MyButton/MyButton";
-import MyInput from "../common/MyInput/MyInput";
+import MyButton from "../../common/MyButton/MyButton";
+import MyInput from "../../common/MyInput/MyInput";
 import {nanoid} from "nanoid";
 
 const AdminPage = ({admin, authAdmin, adminIsOut, addToyCard}) => {

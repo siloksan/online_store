@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import MyInput from "../../../common/MyInput/MyInput";
-import MyButton from "../../../common/MyButton/MyButton";
+import MyInput from "../../../../common/MyInput/MyInput";
+import MyButton from "../../../../common/MyButton/MyButton";
 
 const FeedbackForm = ({addFeedback}) => {
 
@@ -44,7 +44,7 @@ const FeedbackForm = ({addFeedback}) => {
 			<MyInput value={feedback.feedbackText} onChange={e => setFeedback({...feedback, feedbackText: e.target.value})}
 			         type='text'
 			         placeholder="Оставьте свой отзыв"></MyInput>
-			<MyButton onClick={addNewFeedback}>Оставить отзыв</MyButton>
+			<MyButton onClick={addNewFeedback}>Опубликовать</MyButton>
 		</form>
 	);
 };
