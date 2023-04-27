@@ -1,18 +1,24 @@
 import React from 'react';
-import toyPhoto from "../../../media/toys/knb7OunBRkQ.jpg"
 import style from "./PageToy.module.css";
 import MyButton from "../../common/MyButton/MyButton";
-import Reviews from "./Reviews/Reviews";
+// import Reviews from "./Reviews/Reviews";
 
-const PageToy = (props) => {
+const PageToy = () => {
 	//функция дублируется в ToyCard
+	const props = {
+		id: 1,
+		name: 'Афоня',
+		price: 13400,
+		rating: 4,
+		img: 'https://vasinatoys.ru/wp-content/uploads/2022/09/20220518_150959-scaled.jpg'
+	}
 	const putIntoBasket = () => {
-		console.log(props.cards[0].id);
+		console.log(props.id);
 	}
 
 	return (
 		<main>
-			<h1 className={style.title}>{props.cards[0].title}</h1>
+			<h1 className={style.title}>{props.name}</h1>
 			<ul className={style.panel_info}>
 				<li className={style.panel_info__item}>Просмотры</li>
 				<li className={style.panel_info__item}>Rating</li>
@@ -23,27 +29,27 @@ const PageToy = (props) => {
 				<div className={style.photo_switcher}>
 					<ul className={style.photo_switcher__slider}>
 						<li className={style.photo_switcher__slide}>
-							<img className={style.toy_photo} src={toyPhoto}
+							<img className={style.toy_photo} src={props.img}
 							     alt="Фото Игрушки"/></li>
 						<li className={style.photo_switcher__slide}>
-							<img className={style.toy_photo} src={toyPhoto}
+							<img className={style.toy_photo} src={props.img}
 							     alt="Фото Игрушки"/></li>
 						<li className={style.photo_switcher__slide}>
-							<img className={style.toy_photo} src={toyPhoto}
+							<img className={style.toy_photo} src={props.img}
 							     alt="Фото Игрушки"/></li>
 						<li className={style.photo_switcher__slide}>
-							<img className={style.toy_photo} src={toyPhoto}
+							<img className={style.toy_photo} src={props.img}
 							     alt="Фото Игрушки"/></li>
 						<li className={style.photo_switcher__slide}>
-							<img className={style.toy_photo} src={toyPhoto}
+							<img className={style.toy_photo} src={props.img}
 							     alt="Фото Игрушки"/></li>
 					</ul>
-					<img className={style.toy_photo} src={toyPhoto} alt="Фото Игрушки"/>
+					<img className={style.toy_photo} src={props.img} alt="Фото Игрушки"/>
 				</div>
 				<div>
 					<div>price</div>
 					<MyButton onClick={putIntoBasket}>В корзину</MyButton>
-					<p className={style.description}>{props.cards[0].description}</p>
+					{/*<p className={style.description}>{props.description}</p>*/}
 					<p className={style.available}>в наличии или под заказ</p>
 					<p>Поделиться ссылкой на товар</p>
 					<ul className={style.share}>
@@ -55,7 +61,7 @@ const PageToy = (props) => {
 				</div>
 			</div>
 			<section className={style.slide_toys}>Слайдер с карточками на другие игрушки</section>
-			<Reviews admin={props.admin}/>
+			{/*<Reviews admin={props.admin}/>*/}
 		</main>
 	);
 };

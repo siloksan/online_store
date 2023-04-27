@@ -1,21 +1,23 @@
-import React from 'react';
-import style from "./Filtration.module.css";
+import React, {useContext} from 'react';
+// import style from "./Filtration.module.css";
+import {observer} from "mobx-react-lite";
+import {Context} from "../../../../index";
+import MySelect from "../../../common/MySelect/MySelect";
 
-const Filtration = () => {
+const Filtration = observer(() => {
+
+	const {type} = useContext(Context)
+
 	return (
 		<form>
-			<select className={style.categories}>
-				<option value="">Куклы</option>
-				<option value="">Персонажи</option>
-				<option value="">Прочее</option>
-			</select>
-			<select className={style.size}>
-				<option value="">Маленькие</option>
-				<option value="">Средние</option>
-				<option value="">Большие</option>
-			</select>
+			<MySelect options={type.types.map(type => ({value: type.id, name: type.name}))}/>
+		{/*	<select>*/}
+		{/*		{type.types.map(type =>*/}
+		{/*			<option key={type.id} value={type.id}>{type.name}</option>*/}
+		{/*		)}*/}
+		{/*	</select>*/}
 		</form>
 	);
-};
+});
 
 export default Filtration;
